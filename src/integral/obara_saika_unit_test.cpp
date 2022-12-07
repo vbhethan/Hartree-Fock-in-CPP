@@ -78,4 +78,24 @@ TEST_CASE("Check Basis struct") {
     CHECK(std::abs(eri_integral + 7.486283316104355e-08) < 1e-12);
   }
 
+
+  SECTION("check density fitting") {
+    hfincpp::geometry::Atoms atoms;
+    atoms.atomic_numbers = {1, 1};
+    atoms.xyz = {
+        {0, 3.77945},
+        {0, 0},
+        {0, 0}
+    };
+
+    atoms.symbols = {"H", "H"};
+
+    const std::string basis_name = "6-31g";
+    const std::string density_fitting_basis_name = "sto-3g";
+    hfincpp::basis::Basis basis(atoms, basis_name);
+    hfincpp::basis::Basis density_fitting_basis(atoms, density_fitting_basis_name);
+
+    hfincpp::integral::obara_saika::density_fitting_tensor(basis, density_fitting_basis).print();
+  }
+
 }

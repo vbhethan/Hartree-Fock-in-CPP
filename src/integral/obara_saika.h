@@ -31,6 +31,9 @@ namespace gradient {
 arma::cube overlap_integral(const basis::Basis & basis);
 }
 
+arma::cube density_fitting_tensor(const basis::Basis & basis,
+                                  const basis::Basis & density_fitting_basis);
+
 }
 
 
